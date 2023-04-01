@@ -19,7 +19,8 @@ const auth = getAuth(app);
 
 window.addEventListener('load', function() {
     setTimeout(autoSignOut, 100); 
-  });
+});
+
 
 $(document).on("click","#sign-out",function(){toSignOut();})
 

@@ -3957,3 +3957,39 @@ ol {
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.user-account-dropdown{
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+#account-email{
+	text-decoration: underline;
+}
+.user-email:hover .user-account-dropdown {
+	display: flex;
+	flex-direction: column;
+}
+.account-status{
+	color: #ffffff;
+	font-size: 13px;
+	letter-spacing: 2px;
+	margin-right: 28px;
+	display: inline-block;
+
+}
+.user-account-dropdown-item{
+	padding: 10px;
+	text-align: center;
+	background-color: #000;
+	margin-right: 0px !important;
+}
+.user-account-dropdown-item:hover{
+	background-color: #333;
+}
+.account-status:hover{
+	cursor: pointer;
+}
