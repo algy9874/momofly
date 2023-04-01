@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel = "stylesheet" href = "css/login.css">
+  <link rel = "stylesheet" href = "css/style.css">
+  <link rel = "stylesheet" href = "css/message.css">
+  <link rel="stylesheet" href="css/txtStyle.css"/>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+  <import src="module/animate_loading.html"></import>
+  <import src="module/header_message_box.html"></import>
+  <div class="align-center-h flex">
+    <div class = "login-container">
+      <div id= "main">
+        <h1 class="txt-style-title">會員登入</h1>
+        <input class="txt-style-small" id = "email" type = "text" placeholder = "電郵地址"></input>
+        <input class="txt-style-small" id = "password" type = "password" placeholder = "密碼"></input>
+        <label class="txt-style-default txt-error-msg" id="login-fail-msg">沒有錯誤</label> 
+        <button class="txt-style-small" id = "submit">提交</button>
+        <p><span>or</span></p>
+        <button class="txt-style-small" id = "sign-up">註冊</button>
+        <button class="txt-style-small" id = "goback-btn">返回主頁</button>
+      </div>
+
+      <div id = "create-acct">
+        <h1 class="txt-style-title">創建一個帳戶</h1>
+        <input class="txt-style-small" id = "email-signup" type = "text" placeholder = "電郵地址 *"></input>
+        <input class="txt-style-small" id = "confirm-email-signup" type = "email" placeholder = "確定電郵地址 *"></input>
+        <input class="txt-style-small" id = "password-signup" type = "password" placeholder = "密碼 *"></input>
+        <input class="txt-style-small" id = "confirm-password-signup" type = "password" placeholder = "確定密碼 *"></input>
+        <label class="txt-style-default txt-error-msg" id="create-account-fail-msg">沒有錯誤</label> 
+        <button class="txt-style-small" id = "create-acct-btn">創建賬戶</button>
+        <button class="txt-style-small" id = "return-btn">返回登錄</button>
+
+      </div>
+    </div>
+  </div>
+  <script src="js/last_loading.js"></script>
+  <script type = "module" src="js/login.js"></script>
+</body>
+</html>

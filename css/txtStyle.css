@@ -1,0 +1,75 @@
+.txt-style-title{
+    font-size: 32px;
+    font-weight: bold;
+}
+.txt-style-title-message{
+    font-size: 24px;
+    font-weight: bolder;
+}
+.txt-style-default{
+    font-size: 16px;
+}
+.txt-style-small{
+    font-size: 14px;
+}
+.txt-style-large{
+    font-size: 18px;
+}
+.txt-error-msg{
+    color: red;
+    visibility: hidden;
+}
+@media only screen and (max-width: 400px) and (min-width: 10px){
+    .txt-style-title{
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .txt-style-title-message{
+        font-size: 18px;
+    }
+    .txt-style-default{
+        font-size: 13px;
+    }
+    .txt-style-small{
+        font-size: 11px;
+    }
+    .txt-style-large{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 500px) and (min-width: 401px){
+    .txt-style-title{
+        font-size: 26px;
+        font-weight: bold;
+    }
+    .txt-style-title-message{
+        font-size: 20px;
+    }
+    .txt-style-default{
+        font-size: 14px;
+    }
+    .txt-style-small{
+        font-size: 12px;
+    }
+    .txt-style-large{
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 1000px) and (min-width: 501px){
+    .txt-style-title{
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .txt-style-title-message{
+        font-size: 22px;
+    }
+    .txt-style-default{
+        font-size: 15px;
+    }
+    .txt-style-small{
+        font-size: 13px;
+    }
+    .txt-style-large{
+        font-size: 17px;
+    }
+}

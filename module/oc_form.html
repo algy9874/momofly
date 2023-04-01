@@ -1,0 +1,76 @@
+<form class="w3l-simple-contact-form2" action="success_create_order.html" method="post" class="signin-form">
+        <div class="section-gap">
+            <div class="wrapper">
+            <div class="form-inner-cont">
+                <h4 class="txt-style-title create-order-title">1.訂單資料</h4>
+                <div class="form-input">
+                    <label for="w3lName">產品網站</label>
+                    <input type="text" name="oc-link" id="oc-product-link" placeholder="產品相關網站超連結(必須填寫)" required="" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lName">產品名稱</label>
+                    <input type="text" name="oc-name" id="oc-product-name" placeholder="產品名稱(必須填寫)" required="" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lSender">產品類別</label>
+                    <select id="oc-product-type">
+                        <option class="option-item" value="">請選擇產品類別</option>
+                        <option class="option-item" value="電子">電子</option>
+                        <option class="option-item" value="玩具">玩具</option>
+                        <option class="option-item" value="廁所">廁所</option>
+                        <option class="option-item" value="保健">保健</option>
+                        <option class="option-item" value="家居">家居</option>
+                        <option class="option-item" value="戶外">戶外</option>
+                        <option class="option-item" value="食品">食品</option>
+                        <option class="option-item" value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-input">
+                    <label for="w3lSender">產品數量</label>
+                    <input type="number" class="oc-number-box" name="oc-quantity" id="oc-product-quantity" placeholder="產品數量(必須填寫)" maxlength="4" required="" />
+                    </div>
+                <div class="form-input">
+                    <label for="w3lSubject">產品價錢</label>
+                    <input type="number" class="oc-number-box" name="oc-price" id="oc-product-price" placeholder="產品價錢(必須填寫)" required="" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lSender">訂單顯示用戶名稱</label>
+                    <input type="text" name="oc-display-name" id="oc-product-user-name" placeholder="顯示用戶名稱(可選擇填寫)" />
+                </div>
+                <hr class="form-line"/>
+                <h4 class="txt-style-title create-order-title">2.訂單詳情</h4>
+                <div class="form-input">
+                    <label for="w3lSubject">接收產品地址</label>
+                    <input type="text" name="oc-receive-address" id="oc-receive-product-address" placeholder="接收產品地址(必須填寫)" required="" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lSubject">購買地址</label>
+                    <input type="text" name="oc-purchase-address" id="oc-purchase-product-address" placeholder="購買地址(必須填寫)" required="" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lSender">產品圖片</label>
+                    <input type="file" name="oc-image" id="oc-product-image" placeholder="產品數量(必須填寫)"/>
+                    </div>
+                <div class="form-input">
+                    <label for="w3lMessage">產品詳情</label>
+                    <textarea name="oc-details" id="oc-product-details" placeholder="產品備註/描述"></textarea>
+                </div>
+                <button class="btn">提交</button>
+            </div>
+            </div>
+        </div>
+        <div class="section-gap">
+            <div class="wrapper">
+            <div class="form-inner-cont">
+                <h4 class="txt-style-title create-order-title">用戶資料</h4>
+                <div class="form-input">
+                    <input type="text" name="oc-link" id="oc-user-id" readonly="true" value="帳號編號:"/>
+                </div>
+                <div class="form-input">
+                    <input type="text" name="oc-link" id="oc-user-email" readonly="true" value="用戶電郵: "/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
