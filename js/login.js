@@ -86,7 +86,7 @@ createacctbtn.addEventListener("click", function() {
 submitButton.addEventListener("click", function() {
   email = emailInput.value;
   password = passwordInput.value;
-  loginFailMsg(-1);
+  
   //加載動畫
   var delay = 500;
   setLoading(delay);
@@ -137,7 +137,6 @@ function loginFailMsg(messageType){
   var msgText = "電郵地址或密碼錯誤, 請重新輸入";
   if(messageType == 1){msgText = "請輸入電郵地址";}
   else if(messageType == 2){msgText = "請輸入密碼";}
-  else if(messageType == -1){msgText = "";}
   $("#login-fail-msg").text(msgText).css("visibility","visible");
 }
 function createAccountFailMsg(msgText){

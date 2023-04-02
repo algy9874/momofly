@@ -19,8 +19,7 @@ const auth = getAuth(app);
 
 window.addEventListener('load', function() {
     setTimeout(autoSignOut, 100); 
-});
-
+  });
 
 $(document).on("click","#sign-out",function(){toSignOut();})
 
@@ -34,12 +33,14 @@ function toSignOut(){
 
 }
 function autoSignOut(){
-    if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)){
+    if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)&&window.location.pathname=="/index.html"){
         toSignOut();
-        setAccountStatus(false);
-        herfToIndex(window.location.href);
+        setAccountStatus(false)
+    }
+    else if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)&&window.location.pathname!="/index.html"){
+        toSignOut();
     }else {
-        setAccountStatus(true);
+        setAccountStatus(true)
     }
 }
 function setAccountStatus(status){
@@ -48,17 +49,8 @@ function setAccountStatus(status){
         $(".account-status").css("display","inline-block");
         $("#sign-in").css("display","none");
     }else{
-        $("#account-email").text("");
         $(".account-status").css("display","none");
         $("#sign-in").css("display","inline-block");
     }
 
-}
-function herfToIndex(url){
-    var isLoginPage = ["create_order_form.html", "self_order.html", "self_information.html", "success_create_order.html"];
-    for(const page of isLoginPage){
-        if(url.indexOf(page)>0){
-            window.location.href = "index.html";
-        }
-    }
 }
