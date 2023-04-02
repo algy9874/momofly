@@ -19,40 +19,43 @@ let nowTime = Timestamp.fromDate(new Date());
 
 
 $(document).on('DOMContentLoaded', async function() {
-    const urlParams = new URLSearchParams(window.location.search);
+    if(localStorage.getItem("fyp-user-id") && localStorage.getItem("make-order")){
+        const urlParams = new URLSearchParams(window.location.search);
+        const docRef = await addDoc(collection(db, "orderInformation"), {
+        // 1.訂單資料 數據
+        productLink: urlParams.get("oc-link"),
+        productName: urlParams.get("oc-name"),
+        productType: urlParams.get("oc-type"),
+        productQuantity: urlParams.get("oc-quantity"),
+        productPrice: urlParams.get("oc-price"),
+        orderDisplayUserName: urlParams.get("oc-display-name"),
+        // 2.訂單詳情 數據
+        shippingAddress: urlParams.get("oc-receive-address"),
+        purchaseAddress: urlParams.get("oc-purchase-address"),
+        productImage: urlParams.get("oc-image"),
+        creatorAccountID:urlParams.get("oc-details"),
+        // 3.相關資訊 數據
+        remuneration:urlParams.get("oc-remuneration"),
+        currency:urlParams.get("oc-currency"),
+        // 4.系統生成 數據
+        creatorAccountID: localStorage.getItem("fyp-user-id"),
+        creationDate: nowTime,
+        orderStatus: "等待接取"
+        });
 
-    const docRef = await addDoc(collection(db, "orderInformation"), {
-    // 1.訂單資料 數據
-    productLink: urlParams.get("oc-link"),
-    productName: urlParams.get("oc-name"),
-    productType: urlParams.get("oc-type"),
-    productQuantity: urlParams.get("oc-quantity"),
-    productPrice: urlParams.get("oc-price"),
-    orderDisplayUserName: urlParams.get("oc-display-name"),
-    // 2.訂單詳情 數據
-    shippingAddress: urlParams.get("oc-receive-address"),
-    purchaseAddress: urlParams.get("oc-purchase-address"),
-    productImage: urlParams.get("oc-image"),
-    creatorAccountID:urlParams.get("oc-details"),
-    // 3.相關資訊 數據
-    remuneration:urlParams.get("oc-remuneration"),
-    currency:urlParams.get("oc-currency"),
-    // 4.系統生成 數據
-    creatorAccountID: urlParams.get("oc-id"),
-    creationDate: nowTime
-    });
-
-    $("#oc-product-id").text(docRef.id);
-    let date = nowTime.toDate();
-    let year = date.getFullYear();
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
-    let hours = ('0' + date.getHours()).slice(-2);
-    let minutes = ('0' + date.getMinutes()).slice(-2);
-    let seconds = ('0' + date.getSeconds()).slice(-2);
-
-    let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    $("#oc-product-date").text(formattedDate);
-
+        $("#oc-product-id").text(docRef.id);
+        let date = nowTime.toDate();
+        let year = date.getFullYear();
+        let month = ('0' + (date.getMonth() + 1)).slice(-2);
+        let day = ('0' + date.getDate()).slice(-2);
+        let hours = ('0' + date.getHours()).slice(-2);
+        let minutes = ('0' + date.getMinutes()).slice(-2);
+        let seconds = ('0' + date.getSeconds()).slice(-2);
+        let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        $("#oc-product-date").text(formattedDate);
+        localStorage.removeItem("make-order")
+    }else {
+        window.location.href = "shop.html";
+    }
 });
 
