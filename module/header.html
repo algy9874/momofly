@@ -10,10 +10,17 @@
                 <div class="col-lg-6 col-md-5">
                     <div class="header__top__right">
                         <div class="header__top__links">
-                            <a id="sign-in" href="login.html">Sign in</a>
-                            <a style="display: none;" class="account-status" id="account-email" href="#">usetTest@gmail</a>
-                            <a style="display: none;" class="account-status" id="sign-out" href="index.html">Sign out</a>
-
+                            <a id="sign-in" href="login.html">登入</a>
+                            <!--個人選單*f-->
+                            <div style="display: none;" class="account-status user-email">
+                                <div id="account-email">NULL</div>
+                                <div class="user-account-dropdown">
+                                    <a class="user-account-dropdown-item" href="self_information.html">個人信息</a>
+                                    <a class="user-account-dropdown-item" href="self_order.html">查詢訂單</a>
+                                    <a class="user-account-dropdown-item" id="sign-out" href="index.html">登出</a>
+                                </div>
+                            </div>
+                            <!--個人選單*e-->
                             <a href="#">FAQs</a>
                         </div>
                         <div class="header__top__hover">
@@ -37,10 +44,11 @@
             <div class="col-lg-6 col-md-6">
                 <nav class="header__menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">主頁</a></li>
-                        <li><a href="./shop.html">Order</a></li>
+                        <!--之後再修class 'active'-->
+                        <li class="" id="index"><a href="./index.html">主頁</a></li>
+                        <li class="" id="shop"><a href="./shop.html">訂單</a></li>
                         
-                        <li><a href="#">Travel</a>
+                        <li id="travel"><a href="#">Travel</a>
                             <!--
                             <ul class="dropdown">
                                 <li><a href="./about.html">About Us</a></li>
@@ -51,8 +59,8 @@
                             </ul>
                             -->
                         </li>
-                        <li><a href="./blog.html">博客</a></li>
-                        <li><a href="./contact.html">聯絡我們</a></li>
+                        <li class="" id="blog"><a href="./blog.html">博客</a></li>
+                        <li class="" id="contact"><a href="./contact.html">聯絡我們</a></li>
                     </ul>
                 </nav>
             </div>
