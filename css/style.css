@@ -334,7 +334,7 @@ ol {
 	margin-right: 25px;
 }
 
-.header__top__links a{
+.header__top__links a {
 	color: #ffffff;
 	font-size: 13px;
 	text-transform: uppercase;
@@ -1064,7 +1064,7 @@ ol {
 	transition: all, 0.3s;
 }
 
-.product__item__text h6 , .order-item-detali{
+.product__item__text h6 {
 	color: #111111;
 	font-size: 15px;
 	font-weight: 600;
@@ -1084,7 +1084,7 @@ ol {
 	margin-right: -5px;
 }
 
-.product__item__text h5{
+.product__item__text h5 {
 	color: #0d0d0d;
 	font-weight: 700;
 }
@@ -3956,54 +3956,4 @@ ol {
 .browse-order-item-list{
 	display: flex;
 	flex-wrap: wrap;
-}
-.order-item:hover{
-	cursor: pointer;
-}
-.accept-order-btn{
-	background: #fd5f00;
-	border: 0px;
-	border-radius: 10px;
-	padding: 5px 50px;
-	color: #000;
-	font-size: 16px;
-	font-weight: 700;
-	font-family: "Nunito Sans", sans-serif;
-}
-.accept-order-btn:hover{
-	background: #ec4900;
-	transition: 0.3s ease;
-}
-.user-account-dropdown{
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-}
-.user-email:hover .user-account-dropdown {
-	display: flex;
-	flex-direction: column;
-}
-.account-status{
-	color: #ffffff;
-	font-size: 13px;
-	letter-spacing: 2px;
-	margin-right: 28px;
-	display: inline-block;
-	text-decoration: underline;
-
-}
-.user-account-dropdown-item{
-	padding: 10px;
-	text-align: center;
-	background-color: #000;
-	margin-right: 0px !important;
-}
-.user-account-dropdown-item:hover{
-	background-color: #333;
-}
-.account-status:hover{
-	cursor: pointer;
 }

@@ -1,8 +1,6 @@
 $(document).on('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const inputValue = urlParams.get('product-link');
-    localStorage.setItem("make-order", true);
-
     if(inputValue != null)
         document.getElementById("oc-product-link").value = inputValue;
     // document.getElementById("oc-user-id").value += localStorage.getItem("fyp-user-id");
@@ -15,9 +13,6 @@ $(document).on("input", "#oc-product-quantity", function() {
         this.value = "";
     }
 });
-// $(document).on("submit","#form-order-make", function(){
-//     localStorage.setItem("make-order", true);
-// });
 $(document).on("click","#order-information-btn", function(){
     let recordList = [
         document.getElementById("oc-product-link"),
