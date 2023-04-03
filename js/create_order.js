@@ -17,42 +17,90 @@ const db = getFirestore(app);
 
 let nowTime = Timestamp.fromDate(new Date());
 
+function getInputImg(){return document.getElementById('oc-product-image').files;}
 
-$(document).on('DOMContentLoaded', async function() {
-    const urlParams = new URLSearchParams(window.location.search);
-
+function getFormRecord(){
+    var recordList = [];
+    recordList[0] = $('#oc-product-link').val();
+    recordList[1] = $('#oc-product-name').val();
+    recordList[2] = $('#oc-product-type').val();
+    recordList[3] = $('#oc-product-quantity').val();
+    recordList[4] = $('#oc-product-price').val();
+    recordList[5] = $('#oc-product-user-name').val();
+    recordList[6] = $('#oc-receive-product-address').val();
+    recordList[7] = $('#oc-purchase-product-address').val();
+    recordList[8] = $('#oc-product-details').val();
+    recordList[9] = $('#oc-product-remuneration').val();
+    recordList[10] = $('#oc-product-currency').val();
+    return recordList;
+}
+async function createOrder(){
+    const record = getFormRecord();
     const docRef = await addDoc(collection(db, "orderInformation"), {
-    // 1.訂單資料 數據
-    productLink: urlParams.get("oc-link"),
-    productName: urlParams.get("oc-name"),
-    productType: urlParams.get("oc-type"),
-    productQuantity: urlParams.get("oc-quantity"),
-    productPrice: urlParams.get("oc-price"),
-    orderDisplayUserName: urlParams.get("oc-display-name"),
-    // 2.訂單詳情 數據
-    shippingAddress: urlParams.get("oc-receive-address"),
-    purchaseAddress: urlParams.get("oc-purchase-address"),
-    productImage: urlParams.get("oc-image"),
-    creatorAccountID:urlParams.get("oc-details"),
-    // 3.相關資訊 數據
-    remuneration:urlParams.get("oc-remuneration"),
-    currency:urlParams.get("oc-currency"),
-    // 4.系統生成 數據
-    creatorAccountID: urlParams.get("oc-id"),
-    creationDate: nowTime
+        // 1.訂單資料 數據
+        productLink: record[0],
+        productName: record[1],
+        productType: record[2],
+        productQuantity: record[3],
+        productPrice: record[4],
+        orderDisplayUserName: record[5],
+        // 2.訂單詳情 數據
+        shippingAddress: record[6],
+        purchaseAddress: record[7],
+        productImage: getInputImg(),
+        productDetails: record[8],
+
+        // 3.相關資訊 數據
+        remuneration: record[9],
+        currency: record[10],
+        // 4.系統生成 數據
+        creatorAccountID: localStorage.getItem("fyp-user-id"),
+        creationDate: nowTime,
+        orderStatus: "等待接取"
     });
+}
 
-    $("#oc-product-id").text(docRef.id);
-    let date = nowTime.toDate();
-    let year = date.getFullYear();
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
-    let hours = ('0' + date.getHours()).slice(-2);
-    let minutes = ('0' + date.getMinutes()).slice(-2);
-    let seconds = ('0' + date.getSeconds()).slice(-2);
-
-    let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    $("#oc-product-date").text(formattedDate);
-
+$(document).on("click","#create-order-submit-btn", function(){
+    createOrder();
 });
 
+$(document).on('DOMContentLoaded', async function() {
+    if(localStorage.getItem("fyp-user-id") && localStorage.getItem("make-order")){
+        const urlParams = new URLSearchParams(window.location.search);
+        const docRef = await addDoc(collection(db, "orderInformation"), {
+        // 1.訂單資料 數據
+        productLink: urlParams.get("oc-link"),
+        productName: urlParams.get("oc-name"),
+        productType: urlParams.get("oc-type"),
+        productQuantity: urlParams.get("oc-quantity"),
+        productPrice: urlParams.get("oc-price"),
+        orderDisplayUserName: urlParams.get("oc-display-name"),
+        // 2.訂單詳情 數據
+        shippingAddress: urlParams.get("oc-receive-address"),
+        purchaseAddress: urlParams.get("oc-purchase-address"),
+        productImage: urlParams.get("oc-image"),
+        productDetails:urlParams.get("oc-details"),
+        // 3.相關資訊 數據
+        remuneration:urlParams.get("oc-remuneration"),
+        currency:urlParams.get("oc-currency"),
+        // 4.系統生成 數據
+        creatorAccountID: localStorage.getItem("fyp-user-id"),
+        creationDate: nowTime,
+        orderStatus: "等待接取"
+        });
+
+        $("#oc-product-id").text(docRef.id);
+        let date = nowTime.toDate();
+        let year = date.getFullYear();
+        let month = ('0' + (date.getMonth() + 1)).slice(-2);
+        let day = ('0' + date.getDate()).slice(-2);
+        let hours = ('0' + date.getHours()).slice(-2);
+        let minutes = ('0' + date.getMinutes()).slice(-2);
+        let seconds = ('0' + date.getSeconds()).slice(-2);
+        let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        $("#oc-product-date").text(formattedDate);
+        localStorage.removeItem("make-order")
+    }else {
+        window.location.href = "shop.html";
+    }
+});
