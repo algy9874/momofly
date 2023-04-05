@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/txtStyle.css" type="text/css">
     <link rel="stylesheet" href="css/search_focus.css" type="text/css">
     <link rel="stylesheet" href="css/create_order_form.css" type="text/css">
+    <link rel="stylesheet" href="css/message.css" type="text/css">
 
 </head>
 
@@ -48,7 +49,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Order</h4>
+                        <h4>訂單</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.html">主頁</a>
                             <a href="./shop.html">建立訂單</a>
@@ -62,7 +63,19 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shop Section Begin -->
-    <form class="w3l-simple-contact-form2" action="success_create_order.html" method="get" class="signin-form">
+    <import src="module/order_loading.html"></import>
+    <div class="order-form-schedule">
+        <div class="txt-style-large schedule-bar-txt" >
+            <span>當前進度:</span>
+            <span id="current-schedule">填寫基本訂單資料</span>
+        </div>
+        <div class="schedule-bar">
+            <div class="schedule-bar-finish" id="schedule-first"></div>
+            <div class="schedule-bar-finish" id="schedule-second"></div>
+            <div class="schedule-bar-finish" id="schedule-third"></div>
+        </div>
+    </div>
+    <form id="form-order-make" method="get" class="create-order-form">
         <div class="section-gap">
             <div class="wrapper">
             <div class="form-inner-cont" id="order-information">
@@ -116,7 +129,7 @@
                 </div>
                 <div class="form-input">
                     <label for="w3lSender">產品圖片</label>
-                    <input type="file" name="oc-image" id="oc-product-image"/>
+                    <input type="file" name="oc-image" id="oc-product-image" required=""/>
                     </div>
                 <div class="form-input">
                     <label for="w3lMessage">產品詳情</label>
@@ -125,7 +138,7 @@
                 <div class="next-page-btn btn" id="order-information-back">返回</div>
                 <div class="next-page-btn btn" id="order-detali-btn">下一頁</div>
             </div>
-                <div class="form-inner-cont" id="order-about">
+            <div class="form-inner-cont" id="order-about">
                 <h4 class="txt-style-title create-order-title">3.相關資訊</h4>
                 <div class="form-input">
                     <label for="w3lSubject">可獲報酬</label>
@@ -141,7 +154,7 @@
                     </select>
                 </div>
                 <div class="next-page-btn btn" id="order-detali-back">返回</div>
-                <button type="submit" class="btn">提交</button>
+                <button type="button" class="btn" id="create-order-submit-btn">提交</button>
             </div>
             </div>
         </div>
@@ -184,6 +197,7 @@
     <script src="js/search.js"></script>
     <script src="js/logout.js" type="module"></script>
     <script src="js/order.js"></script>
+    <script src="js/create_order.js" type="module"></script>
 
 </body>
 
