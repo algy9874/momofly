@@ -83,7 +83,8 @@ p {
 }
 
 img {
-	max-width: 100%;
+	max-width: 90%;
+	max-height: 90%;
 }
 input:focus,
 select:focus,
@@ -188,16 +189,14 @@ ol {
 	left: 0;
 	z-index: 999999;
 	background: #000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .loader {
 	width: 40px;
 	height: 40px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -13px;
-	margin-left: -13px;
 	border-radius: 60px;
 	animation: loader 0.8s linear infinite;
 	-webkit-animation: loader 0.8s linear infinite;
@@ -334,7 +333,7 @@ ol {
 	margin-right: 25px;
 }
 
-.header__top__links a {
+.header__top__links a{
 	color: #ffffff;
 	font-size: 13px;
 	text-transform: uppercase;
@@ -1064,7 +1063,7 @@ ol {
 	transition: all, 0.3s;
 }
 
-.product__item__text h6 {
+.product__item__text h6 , .order-item-detali{
 	color: #111111;
 	font-size: 15px;
 	font-weight: 600;
@@ -1084,7 +1083,7 @@ ol {
 	margin-right: -5px;
 }
 
-.product__item__text h5 {
+.product__item__text h5{
 	color: #0d0d0d;
 	font-weight: 700;
 }
@@ -3889,10 +3888,10 @@ ol {
 	border-radius: 5px;
 	margin-left: 10px;
 	padding: 7px 15px 7px 15px;
-	background-color: #f9f9f9;
+	background-color: #faecc7;
 }
 .submit-btn:hover, .order-create-style:hover{
-	background-color: #f3f3f3;
+	background-color: #e9dbb6;
 	color: #333;
 }
 .order-create-style{
@@ -3908,14 +3907,15 @@ ol {
 }
 .fm-success-msg-box{
 	position: relative;
-	width: 250px;
-	height: 300px;
+	width: 300px;
+	height: 350px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	border-radius: 10px;
-	background-color: #e1e1e1;
+	background-color: #eeeeee;
 	box-shadow: 0 0 10px #333;
+	padding: 20px 10px;
 }
 .success-msg-box-item{
 	padding: 8px;
@@ -3923,6 +3923,10 @@ ol {
 .success-msg-box-item-text{
 	padding-left: 2px;
 	padding-right: 2px;
+}
+.txt-make-order-result{
+	font-weight: 700;
+	font-size: 16px;
 }
 .success-msg-box-item, .success-msg-box-item-text{
 	display: flex;
@@ -3956,4 +3960,60 @@ ol {
 .browse-order-item-list{
 	display: flex;
 	flex-wrap: wrap;
+}
+.order-item:hover{
+	cursor: pointer;
+}
+.accept-order-btn{
+	background: #fd5f00;
+	border: 0px;
+	border-radius: 10px;
+	padding: 5px 50px;
+	color: #000;
+	font-size: 16px;
+	font-weight: 700;
+	font-family: "Nunito Sans", sans-serif;
+}
+.accept-order-btn:hover{
+	background: #ec4900;
+	transition: 0.3s ease;
+}
+.user-account-dropdown{
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 99;
+}
+.user-email:hover .user-account-dropdown {
+	display: flex;
+	flex-direction: column;
+}
+.account-status{
+	color: #ffffff;
+	font-size: 13px;
+	letter-spacing: 2px;
+	margin-right: 28px;
+	display: inline-block;
+	text-decoration: underline;
+
+}
+.user-account-dropdown-item{
+	padding: 10px;
+	text-align: center;
+	background-color: #000;
+	margin-right: 0px !important;
+}
+.user-account-dropdown-item:hover{
+	background-color: #333;
+}
+.account-status:hover{
+	cursor: pointer;
+}
+#success-msg-box-return-btn{
+	text-decoration: underline;
+}
+#success-msg-box-return-btn:hover{
+	color: #1da1f2 !important;
 }
