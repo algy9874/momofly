@@ -83,7 +83,8 @@ p {
 }
 
 img {
-	max-width: 100%;
+	max-width: 90%;
+	max-height: 90%;
 }
 input:focus,
 select:focus,
@@ -188,16 +189,14 @@ ol {
 	left: 0;
 	z-index: 999999;
 	background: #000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .loader {
 	width: 40px;
 	height: 40px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -13px;
-	margin-left: -13px;
 	border-radius: 60px;
 	animation: loader 0.8s linear infinite;
 	-webkit-animation: loader 0.8s linear infinite;
@@ -334,7 +333,7 @@ ol {
 	margin-right: 25px;
 }
 
-.header__top__links a {
+.header__top__links a{
 	color: #ffffff;
 	font-size: 13px;
 	text-transform: uppercase;
@@ -1064,7 +1063,7 @@ ol {
 	transition: all, 0.3s;
 }
 
-.product__item__text h6 {
+.product__item__text h6 , .order-item-detali{
 	color: #111111;
 	font-size: 15px;
 	font-weight: 600;
@@ -1084,7 +1083,7 @@ ol {
 	margin-right: -5px;
 }
 
-.product__item__text h5 {
+.product__item__text h5{
 	color: #0d0d0d;
 	font-weight: 700;
 }
@@ -3889,10 +3888,10 @@ ol {
 	border-radius: 5px;
 	margin-left: 10px;
 	padding: 7px 15px 7px 15px;
-	background-color: #f9f9f9;
+	background-color: #faecc7;
 }
 .submit-btn:hover, .order-create-style:hover{
-	background-color: #f3f3f3;
+	background-color: #e9dbb6;
 	color: #333;
 }
 .order-create-style{
@@ -3908,14 +3907,15 @@ ol {
 }
 .fm-success-msg-box{
 	position: relative;
-	width: 250px;
-	height: 300px;
+	width: 300px;
+	height: 350px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	border-radius: 10px;
-	background-color: #e1e1e1;
+	background-color: #eeeeee;
 	box-shadow: 0 0 10px #333;
+	padding: 20px 10px;
 }
 .success-msg-box-item{
 	padding: 8px;
@@ -3923,6 +3923,10 @@ ol {
 .success-msg-box-item-text{
 	padding-left: 2px;
 	padding-right: 2px;
+}
+.txt-make-order-result{
+	font-weight: 700;
+	font-size: 16px;
 }
 .success-msg-box-item, .success-msg-box-item-text{
 	display: flex;
@@ -3956,4 +3960,463 @@ ol {
 .browse-order-item-list{
 	display: flex;
 	flex-wrap: wrap;
+}
+.order-item:hover{
+	cursor: pointer;
+}
+.accept-order-btn{
+	background: #fd5f00;
+	border: 0px;
+	border-radius: 10px;
+	padding: 5px 50px;
+	color: #000;
+	font-size: 16px;
+	font-weight: 700;
+	font-family: "Nunito Sans", sans-serif;
+}
+.accept-order-btn:hover{
+	background: #ec4900;
+	transition: 0.3s ease;
+}
+.user-account-dropdown{
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 99;
+}
+.user-email:hover .user-account-dropdown {
+	display: flex;
+	flex-direction: column;
+}
+.account-status{
+	color: #ffffff;
+	font-size: 13px;
+	letter-spacing: 2px;
+	margin-right: 28px;
+	display: inline-block;
+	text-decoration: underline;
+
+}
+.user-account-dropdown-item{
+	padding: 10px;
+	text-align: center;
+	background-color: #000;
+	margin-right: 0px !important;
+}
+.user-account-dropdown-item:hover{
+	background-color: #333;
+}
+.account-status:hover{
+	cursor: pointer;
+}
+#success-msg-box-return-btn{
+	text-decoration: underline;
+}
+#success-msg-box-return-btn:hover{
+	color: #1da1f2 !important;
+}
+
+
+
+
+/*展示訂單詳細的CSS*/
+.order-detail-background{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	background: #000;
+	opacity: 0.6;
+}
+.fm-order-detail{
+	position: fixed;
+	z-index: 50;
+	box-shadow: 0 0 5px black;
+	height: 85%;
+	background-color: #fff;
+	bottom: 0px;
+	right: 10px;
+	left: 10px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 30px;
+}
+#order-detail-close-btn{
+	position: absolute;
+	top: 5px;
+	width: 40px;
+	height: 40px;
+	color: #ddd;
+	font-size: 48px;
+	line-height: 48px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 50%;
+	transform: rotate(45deg);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	user-select: none;
+}
+.fix-location{
+	margin-bottom: 11px;
+}
+.fm-order-detail-content{
+	position: relative;
+	top: -20px;
+	width: 100%;
+	height: 85%;
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
+	padding-bottom: 30px;
+}
+.fm-order-detail ::-webkit-scrollbar {
+	width: 0px;
+}
+.word-wrap{
+	display: flex;
+	word-wrap: break-word;
+	margin-top: 10px;
+}
+.order-image-size{
+	min-width: 200px;
+	min-height: 200px;
+	max-width: 600px;
+	max-height: 600px;
+	position: relative;
+	left: 5px;
+}
+.txt-order-detail{
+	font-weight: 600 !important;
+}
+.order-detail-txt-block-size{
+	min-width: 200px;
+}
+.order-detail-block{
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.order-detail-line{
+	background-color: black;
+	height: 1px !important;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.order-line{
+	background-color: black;
+	width: 100vw;
+}
+#show-order-product-call-user{
+	color: #2a26fd;
+	text-decoration: underline;
+	user-select: none;
+}
+#show-order-product-call-user:hover{
+	opacity: 0.75;
+	cursor: pointer;
+}
+#report-btn, #receive-btn, #send-message-btn, #submit-accept-order-btn{
+	position: absolute;
+	height: 45px;
+	font-size: 16px !important;
+	border-radius: 10px;
+	border: 0px;
+	font-weight: 700;
+	font-family: "Nunito Sans", sans-serif;
+	z-index: 20;
+}
+#send-message-btn, #submit-accept-order-btn{
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+#send-message-btn{
+	background-color: #1da1f2;
+	color: #f9f9ee;
+}
+#submit-accept-order-btn{
+	background-color: #1df299;
+	color: #261f29;
+}
+#submit-accept-order-btn:hover{
+	background-color: #0ce388;
+}
+#send-message-btn:hover{
+	background-color: #1c91e5;
+}
+#report-btn{
+	width: 20%;
+	bottom: 10px;
+	background-color: #ee0003;
+	color: #f3f2ee;
+	left: 20px;
+}
+#receive-btn{
+	width: 75%;
+	right: 20px;
+	bottom: 10px;
+	background-color: #fd5f00;
+	color: black;
+}
+#receive-btn:hover, #report-btn:hover{
+	cursor: pointer;
+}
+#report-btn:hover{
+	cursor: pointer;
+	background-color: #ff2225;
+}
+#receive-btn:hover{
+	background-color: #ec4900;
+}
+.fill-space{
+	height: 50px;
+}
+.question-comment-area-title{
+	font-size: 20px;
+	color: #1da1f2;
+	font-weight: bolder !important;
+}
+.question-comment-area{
+	position: relative;
+	width: 100%;
+	padding: 0px 10px 5px 10px;
+	border: 3px #aaa solid;
+	border-radius: 5px;
+	background-color: #fefefe;
+	font-size: 14px;
+}
+.cmt-user-name{
+	font-size: 16px !important;
+	font-weight: 700;
+}
+.txt-style-cmt{
+	font-family: Consolas,monaco,monospace; 
+}
+.user-self-comment{
+	background-color: #fcfcd3;
+	border-color: #d6d437;
+}
+#ctm-add-btn{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	border-radius: 10px;
+	border: 0px;
+	box-shadow: 0 0 3px blue;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	font-weight: 600;
+	background-color: #79cff6;
+	color: #000;
+}
+#ctm-add-btn:hover{
+	background-color: #68bff5;
+}
+.cmt-time{
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+}
+.repty-btn{
+	position: absolute;
+	top: 0;
+	right: 5px;
+	font-weight: bolder;
+	user-select: none;
+	display: none;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+.question-comment-area:hover .repty-btn{
+	cursor: pointer;
+	display: block;
+}
+.message-box-background{
+	background-color: #000;
+	opacity: 0.7;
+	position: fixed;
+	z-index: 99;
+	width: 100%;
+	height: 100%;
+
+}
+.fm-message-box{
+	position: fixed;
+	z-index: 999;
+	width: 600px;
+	height: 400px;
+	background-color: #fefefe;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	
+}
+.fm-message-box span{
+	font-weight: 800;
+}
+.message-box-input, .message-box-txtarea{
+	width: 100%;
+	font-size: 14px;
+	padding: 5px 10px;
+	border: 1px solid #222;
+	border-radius: 5px;
+	box-shadow: 0 0 2px #222;
+	font-weight: 600;
+}
+.message-box-txtarea{
+	height: 75px;
+	resize: none;
+	scrollbar-width: thin;
+	scrollbar-color:#fefefe;
+}
+.message-box-txtarea::-webkit-scrollbar {
+	width: 10px;
+}
+
+.message-box-txtarea::-webkit-scrollbar-track {
+	background-color: #f5f5f5;
+}
+
+.message-box-txtarea::-webkit-scrollbar-thumb {
+	background-color: #0173b2;
+	border-radius: 20px;
+	border: 3px solid #fefefe;
+}
+.message-box-txtarea:focus, .message-box-input:focus{
+	box-shadow: 0 0 3px #5855fc;
+	border-color: #5855fc;
+
+}
+#txtarea-comment, #txtarea-accept-reason{
+	width: auto !important;
+	height: 100%;
+
+}
+.txt-area-block{
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	height: 70%;
+	bottom: 70px;
+	display: flex;
+}
+#comment-title{
+	margin-bottom: 10px;
+}
+#comment{
+	bottom: 70px;
+}
+#comment-user-name{
+	margin-bottom: 20px;
+}
+.animate-submit{
+	position: absolute;
+	top: 45%;
+}
+#submit-success{
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 15%;
+	height: 60%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#close-all-goback-btn{
+	position: absolute;
+	bottom: 20px;
+	text-decoration: underline;
+	color: #2a26fd;
+	user-select: none;
+}
+#close-all-goback-btn:hover{
+	cursor: pointer;
+	color: #2915ec;
+}
+.m-top-10{
+	margin-top: 10px;
+}
+.txt-msg-block{
+	position: relative;
+	width: 100%;
+	margin: auto;
+}
+.txt-msg-title{
+	position: absolute;
+	left: 10px;
+}
+#accept-order-id, #accept-order-time{
+	position: absolute;
+	right: 10px;
+}
+
+@media only screen and (max-width: 700px){
+	.order-image-size{
+		left: 0px;
+	}
+	.word-wrap{
+		flex-direction: column;
+	}
+	#show-order-product-name{
+		margin-top: 10px;
+	}
+	#report-btn, #receive-btn{
+		height: 40px;
+		width: auto;
+		left: 20px;
+		right: 20px
+	}	
+	#report-btn{
+		bottom: 50px;
+	}
+	#receive-btn{
+		bottom: 5px;
+	}
+	.fm-message-box{
+		width: 240px;
+		height: 300px;
+	}	
+}
+@media only screen and (max-height: 750px) and (min-height: 550px){
+	.fm-order-detail-content{
+		height: 75%;
+	}
+}
+@media only screen and (max-height: 549px) and (min-height: 450px){
+	.fm-order-detail-content{
+		height: 70%;
+	}
+}
+@media only screen and (max-height: 449px) and (min-height: 350px){
+	.fm-order-detail-content{
+		height: 65%;
+	}
+}
+@media only screen and (max-height: 349px) and (min-height: 250px){
+	.fm-order-detail-content{
+		height: 55%;
+	}
+}
+@media only screen and (max-height: 249px) and (min-height: 0px){
+	.fm-order-detail-content{
+		height: 50%;
+	}
 }

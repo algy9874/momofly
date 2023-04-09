@@ -71,7 +71,46 @@
     opacity: 1;
     text-align: center;
 }
-
+.order-loading-message-box{
+    opacity: 1 !important;
+    width: 250px;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.o-l-m{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.upload-message-text{
+    font-weight: 700;
+}
+#upload-fail, #upload-image-fail{
+    display: none;
+}
+.upload-fail-text{
+    color: #cc2222;
+}
+.margin-b-10{
+    margin-bottom: 10px;
+}
+#reupload-order-btn, #reupload-order-img-btn{
+    margin-top: 10px;
+    padding: 3px 40px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #16dac9;
+    color: #fff;
+}
+#reupload-order-btn:hover, #reupload-order-img-btn{
+    background-color: #05c9b8;
+    color: #eee;
+}
 @media only screen and (max-width: 400px) and (min-width: 100px){
     .fm-icon{
         width: 48px;
@@ -114,3 +153,4 @@
         width: 240px;
     }
 }
+

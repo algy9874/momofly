@@ -25,15 +25,11 @@
     <link rel="stylesheet" href="css/txtStyle.css" type="text/css">
     <link rel="stylesheet" href="css/search_focus.css" type="text/css">
     <link rel="stylesheet" href="css/create_order_form.css" type="text/css">
+    <link rel="stylesheet" href="css/message.css" type="text/css">
 
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <!-- <div id="preloder">
-        <div class="loader"></div>
-    </div> -->
-
     <!-- Offcanvas Menu Begin -->
     <import src="module/offcanvas.html"></import>
     <!-- Offcanvas Menu End -->
@@ -48,7 +44,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Order</h4>
+                        <h4>訂單</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.html">主頁</a>
                             <a href="./shop.html">建立訂單</a>
@@ -62,7 +58,22 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shop Section Begin -->
-    <form class="w3l-simple-contact-form2" action="success_create_order.html" method="get" class="signin-form">
+    <import src="module/order_loading.html"></import>
+    <div class="load-form"></div>
+    <div class="order-form-progress">
+        <div class="txt-style-large progress-bar-txt" >
+            <span>當前進度:</span>
+            <span id="current-progress"></span>
+        </div>
+        <div class="form-progress-bar">
+            <div class="progress-bar-finish" id="progress-first"></div>
+            <div class="progress-bar-finish" id="progress-second"></div>
+            <div class="progress-bar-finish" id="progress-third"></div>
+            <div class="progress-bar-finish" id="progress-fourth"></div>
+
+        </div>
+    </div>
+    <form id="form-order-make" method="get" class="create-order-form">
         <div class="section-gap">
             <div class="wrapper">
             <div class="form-inner-cont" id="order-information">
@@ -70,90 +81,193 @@
                 <div class="form-input">
                     <label for="w3lName">產品網站</label>
                     <input type="text" name="oc-link" id="oc-product-link" placeholder="產品相關網站超連結(必須填寫)" required="" />
+                    <span class="order-form-error-message none" id="oc-product-link-err">產品網站必須填寫 !!!</span>
                 </div>
                 <div class="form-input">
                     <label for="w3lName">產品名稱</label>
                     <input type="text" name="oc-name" id="oc-product-name" placeholder="產品名稱(必須填寫)" required="" />
+                    <span class="order-form-error-message none" id="oc-product-name-err">產品名稱必須填寫 !!!</span>
                 </div>
                 <div class="form-input">
                     <label for="w3lSender">產品類別</label>
-                    <select class="oc-product-select" name="oc-type" id="oc-product-type" required="">
-                        <option class="option-item" value="">請選擇產品類別</option>
-                        <option class="option-item" value="電子">電子</option>
-                        <option class="option-item" value="玩具">玩具</option>
-                        <option class="option-item" value="廁所">廁所</option>
-                        <option class="option-item" value="保健">保健</option>
-                        <option class="option-item" value="家居">家居</option>
-                        <option class="option-item" value="戶外">戶外</option>
-                        <option class="option-item" value="食品">食品</option>
-                        <option class="option-item" value="其他">其他</option>
-                    </select>
+                    <div class="product-select-box">
+                        <input class="oc-product-select" name="oc-type" id="oc-product-type" required="" type="text" placeholder="請選擇產品類別" readonly="true"/>
+                        <div class="product-select-box-option" id="oc-product-type-select">
+                            <span class="product-select-box-item select-product-type">電子</span>
+                            <span class="product-select-box-item select-product-type">戶外</span>
+                            <span class="product-select-box-item select-product-type">食品</span>
+                            <span class="product-select-box-item select-product-type">保健</span>
+                            <span class="product-select-box-item select-product-type">家居</span>
+                            <span class="product-select-box-item select-product-type">植物</span>
+                            <span class="product-select-box-item select-product-type">兒童用品</span>
+                            <span class="product-select-box-item select-product-type">動物加工品</span>
+                            <span class="product-select-box-item select-product-type">其他</span>
+                        </div>
+                    </div>
+                    <span class="order-form-error-message none" id="oc-product-type-err">產品類別必須選擇 !!!</span>
                 </div>
                 <div class="form-input">
                     <label for="w3lSender">產品數量</label>
                     <input type="number" class="oc-number-box" name="oc-quantity" id="oc-product-quantity" placeholder="產品數量(必須填寫)" maxlength="4" required="" />
-                    </div>
-                <div class="form-input">
-                    <label for="w3lSubject">產品價錢</label>
-                    <input type="number" step="0.001" class="oc-number-box" name="oc-price" id="oc-product-price" placeholder="產品價錢(必須填寫) " required="" />
+                    <span class="order-form-error-message none" id="oc-product-quantity-err">產品數量必須填寫 !!!</span>
+    
                 </div>
                 <div class="form-input">
-                    <label for="w3lSender">訂單顯示用戶名稱</label>
-                    <input type="text" name="oc-display-name" id="oc-product-user-name" placeholder="顯示用戶名稱(可選擇填寫)" />
+                    <label for="w3lSubject">產品價錢(單件)</label>
+                    <input type="number" step="0.001" class="oc-number-box" name="oc-price" id="oc-product-price" placeholder="產品價錢(必須填寫) " required="" />
+                    <span class="order-form-error-message none" id="oc-product-price-err">產品價錢必須填寫 !!!</span>
+
+                </div>
+                <div class="form-input">
+                    <label for="w3lSubject">貨幣</label>
+                    <div class="product-select-box">
+                        <input class="oc-product-select" id="oc-product-price-currency" required="" type="text" placeholder="請選擇貨幣" readonly="true"/>
+                        <div class="product-select-box-option" id="oc-product-price-currency-select">
+                            <span class="product-select-box-item select-product-price-currency">USD</span>
+                            <span class="product-select-box-item select-product-price-currency">HKD</span>
+                            <span class="product-select-box-item select-product-price-currency">EUR</span>
+                        </div>
+                    </div>
+                    <span class="order-form-error-message none" id="oc-product-price-currency-err">貨幣必須選擇 !!!</span>
+
                 </div>
                 <div class="next-page-btn btn" id="order-information-btn">下一頁</div>
     
             </div>
-            <div class="form-inner-cont" id="order-detali">
+            <div class="form-inner-cont" id="order-detail">
                 <h4 class="txt-style-title create-order-title">2.訂單詳情</h4>
-                <div class="form-input">
-                    <label for="w3lSubject">接收產品地址</label>
-                    <input type="text" name="oc-receive-address" id="oc-receive-product-address" placeholder="接收產品地址(必須填寫)" required="" />
-                </div>
+
                 <div class="form-input">
                     <label for="w3lSubject">購買地址</label>
                     <input type="text" name="oc-purchase-address" id="oc-purchase-product-address" placeholder="購買地址(必須填寫)" required="" />
+                    <span class="order-form-error-message none" id="oc-purchase-product-address-err">購買地址必須填寫 !!!</span>
+
+                </div>
+                <div class="form-input">
+                    <label for="w3lSubject">接收地址</label>
+                    <input type="text" name="oc-receive-address" id="oc-receive-product-address" placeholder="接收產品地址(必須填寫)" required="" />
+                    <span class="order-form-error-message none" id="oc-receive-product-address-err">接收地址必須填寫 !!!</span>
+
                 </div>
                 <div class="form-input">
                     <label for="w3lSender">產品圖片</label>
-                    <input type="file" name="oc-image" id="oc-product-image"/>
-                    </div>
+                    <input type="file" name="oc-image" id="oc-product-image" required=""/>
+                    <span class="order-form-error-message none" id="oc-product-image-err">必須提供產品圖片 !!!</span>
+                </div>
                 <div class="form-input">
                     <label for="w3lMessage">產品詳情</label>
                     <textarea name="oc-details" id="oc-product-details" placeholder="產品備註/描述"></textarea>
                 </div>
                 <div class="next-page-btn btn" id="order-information-back">返回</div>
-                <div class="next-page-btn btn" id="order-detali-btn">下一頁</div>
+                <div class="next-page-btn btn" id="order-detail-btn">下一頁</div>
             </div>
-                <div class="form-inner-cont" id="order-about">
+            <div class="form-inner-cont" id="order-about">
                 <h4 class="txt-style-title create-order-title">3.相關資訊</h4>
                 <div class="form-input">
-                    <label for="w3lSubject">可獲報酬</label>
+                    <label for="w3lSender">訂單顯示用戶名稱</label>
+                    <input type="text" name="oc-display-name" id="oc-product-user-name" placeholder="顯示用戶名稱(可選擇填寫)" />
+                </div>
+                <div class="form-input">
+                    <label for="w3lSubject">設定可獲報酬</label>
                     <input type="number" step="0.001" class="oc-number-box" name="oc-remuneration" id="oc-product-remuneration" placeholder="報酬(必須填寫)" maxlength="4" required="" />
+                    <span class="order-form-error-message none" id="oc-product-remuneration-err">必須設定報酬 !!!</span>
+
                 </div>
                 <div class="form-input">
-                    <label for="w3lSender">貨幣</label>
-                    <select name="oc-currency" class="oc-product-select" id="oc-product-currency" required="">
-                        <option class="option-item" value="">請選擇貨幣</option>
-                        <option class="option-item" value="HKD">HKD</option>
-                        <option class="option-item" value="USD">USD</option>
-                        <option class="option-item" value="EUR">EUR</option>
-                    </select>
+                    <label for="w3lSender">報酬貨幣</label>
+                    <div class="product-select-box">
+                        <input name="oc-currency" class="oc-product-select" id="oc-product-currency" type="text" placeholder="請選擇貨幣" readonly="true"/>
+                        <div class="product-select-box-option" id="oc-product-currency-select">
+                            <span class="product-select-box-item select-product-currency">USD</span>
+                            <span class="product-select-box-item select-product-currency">HKD</span>
+                            <span class="product-select-box-item select-product-currency">EUR</span>
+                        </div>
+                    </div>   
+                    <span class="order-form-error-message none" id="oc-product-currency-err">報酬貨幣必須選擇 !!!</span>                 
                 </div>
-                <div class="next-page-btn btn" id="order-detali-back">返回</div>
-                <button type="submit" class="btn">提交</button>
+                <div class="next-page-btn btn" id="order-detail-back">返回</div>
+                <button type="button" class="btn" id="generate-order-record-btn">確定</button>
+
             </div>
-            </div>
-        </div>
-        <div class="section-gap" id="order-user-information">
-            <div class="wrapper">
-            <div class="form-inner-cont">
-                <div class="form-input">
-                    <input type="text" name="oc-id" id="oc-user-id" readonly="true" value=""/>
+            <div class="form-inner-cont" id="order-record">
+                <h4 class="txt-style-title create-order-title">4.確定訂單資料</h4>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex flex-d-col">
+                        <span>產品網站:</span>
+                        <span id="pd-link"></span>
+                    </div>
                 </div>
-                <div class="form-input">
-                    <input type="text" name="oc-user-email" id="oc-email" readonly="true" value=""/>
+                <div class="d-flex m-top-5">
+                    <hr class="order-line"/>
                 </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex flex-d-col">
+                        <span>產品名稱:</span>
+                        <span id="pd-name"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex flex-d-col">
+                        <span>購買地址:</span>
+                        <span id="pd-purchase-address"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex flex-d-col">
+                        <span>接收地址:</span>
+                        <span id="pd-receive-address"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <hr class="order-line"/>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex flex-d-col">
+                        <span>產品詳情:</span>
+                        <span id="pd-details"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <hr class="order-line"/>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record">
+                        <span>訂單顯示用戶名稱:</span>
+                        <span id="pd-user-name"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record">
+                        <span>報酬金額:</span>
+                        <span id="pd-remuneration"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record">
+                        <span>價錢(單件):</span>
+                        <span id="pd-price"></span>
+                    </div>
+                    <div class="generate-order-record">
+                        <span>數量:</span>
+                        <span id="pd-quantity"></span>
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <hr class="order-line"/>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="generate-order-record d-flex">
+                        <span>產品累計金額 (!不包括報酬):</span>
+                        <span id="pd-total-price"></span> 
+                    </div>
+                </div>
+                <div class="d-flex m-top-5">
+                    <div class="hint">
+                        <span>#點擊上方的進度條可直接前往對應的頁面</span>
+                    </div>
+                </div>
+                <button type="button" class="btn" id="create-order-submit-btn">提交</button>
+            </div>  
             </div>
         </div>
     </div>
@@ -184,6 +298,7 @@
     <script src="js/search.js"></script>
     <script src="js/logout.js" type="module"></script>
     <script src="js/order.js"></script>
+    <script src="js/create_order.js" type="module"></script>
 
 </body>
 

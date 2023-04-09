@@ -15,6 +15,7 @@
 .txt-style-large{
     font-size: 18px;
 }
+
 .txt-error-msg{
     color: red;
     visibility: hidden;
