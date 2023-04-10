@@ -86,7 +86,7 @@ createacctbtn.addEventListener("click", function() {
 submitButton.addEventListener("click", function() {
   email = emailInput.value;
   password = passwordInput.value;
-  
+  loginFailMsg(-1);
   //加載動畫
   var delay = 500;
   setLoading(delay);
@@ -128,8 +128,8 @@ gobackBtn.addEventListener("click", function() {
   window.location.href="index.html"; 
 });
 function setLoading(delayTime){
-  $("#preloder").css("display","block");
-  $(".loader").css("display","block");
+  $("#preloder").css("display","flex");
+  $(".loader").css("display","flex");
   $(".loader").delay(delayTime-200).fadeOut("fast");
   $("#preloder").delay(delayTime).fadeOut("slow");
 }
@@ -137,6 +137,7 @@ function loginFailMsg(messageType){
   var msgText = "電郵地址或密碼錯誤, 請重新輸入";
   if(messageType == 1){msgText = "請輸入電郵地址";}
   else if(messageType == 2){msgText = "請輸入密碼";}
+  else if(messageType == -1){msgText = "";}
   $("#login-fail-msg").text(msgText).css("visibility","visible");
 }
 function createAccountFailMsg(msgText){
@@ -151,9 +152,3 @@ function setUserRecord(uid, email){
   localStorage.setItem("fyp-email", email);
 
 }
-// function completeLength(text, text2){
-//   if(text.length > text2.length)
-//     return text.length
-//   else
-//     return text2.length
-// }

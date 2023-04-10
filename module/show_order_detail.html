@@ -1,0 +1,124 @@
+<div class="message-box-background none"></div>
+<div class="fm-message-box code none" id="comment-box">
+    <button class="txt-style-large" id="send-message-btn">發出信息</button>
+    <span class="txt-style-title-message" id="comment-title">評論/提問</span>   
+    <div class="d-flex flex-d-col txt-area-block" id="comment">
+        <span class="txt-style-large">顯示用戶名稱</span>   
+        <input type="text" class="message-box-input" id="comment-user-name" placeholder="預設名稱: 隱藏"/>
+        <span class="txt-style-large" id="txt-area-comment-title">內容</span>   
+        <textarea class="message-box-txtarea" id="txtarea-comment"></textarea>
+    </div>
+</div>
+<div class="fm-message-box code none" id="accept-order-box">
+    <button class="txt-style-large load-submit-accept-order" id="submit-accept-order-btn">提交申請接取</button>
+    <span class="txt-style-large none submit-accept-order-success" id="close-all-goback-btn">返回</span>   
+    <span class="txt-style-title-message">接取訂單</span>   
+    <div class="flex-d-col txt-area-block load-submit-accept-order">
+        <span class="txt-style-large">顯示用戶名稱</span>   
+        <input type="text" class="message-box-input" id="comment-user-name" placeholder="可選擇填寫"/>
+        <span class="txt-style-large">申請原因</span>   
+        <textarea class="message-box-txtarea" id="txtarea-accept-reason"></textarea>
+    </div>
+    <div class="none flex-d-col load-submit-accept-order submit-accept-order-success" id="submit-success">
+        <img src="img/success_tick.png"></img>
+        <span class="txt-style-title-message">提交訂單申請成功</span>   
+        <div class="m-top-10 txt-msg-block">
+            <span class="txt-style-large txt-msg-title">申請編號</span>   
+            <span class="txt-style-large" id="accept-order-id"></span>   
+        </div>
+        <div class="m-top-10">
+            <span class="txt-style-large txt-msg-title">申請時間</span>   
+            <span class="txt-style-large" id="accept-order-time"></span>   
+        </div>
+    </div>
+    <div class="loader animate-submit none" id="animate-accept-order"></div>
+</div>
+<div class="order-detail-background none"></div>
+<div class="fm-order-detail none">
+    <div id="order-detail-close-btn"><span class="fix-location">+</span></div>
+    <div class="loader" id="loader-record"></div>
+    <button class="txt-style-large loading-element none" id="report-btn">檢舉訂單</button>
+    <button class="txt-style-large loading-element none" id="receive-btn">提出接取訂單</button>
+    <input type="hidden" id="fyp-order-id"/>
+    <input type="hidden" id="create-order-user-id"/>
+    <div class="fm-order-detail-content loading-element none">
+        <div class="word-wrap">
+            <img class="order-image-size" id="show-order-product-image" src=""/>
+            <div class="txt-order-detail order-detail-block">
+                <span class="txt-style-title-message" id="show-order-product-name"></span>
+                <hr class="order-detail-line">
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品類別: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-type"></span>
+                </div>
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品數量: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-quantity"></span>
+                </div>
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品價錢: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-price"></span>
+                </div>
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">報酬金額: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-remuneration"></span>
+                </div>
+                <hr class="order-detail-line">
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">訂單發出用戶: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-user-name"></span>
+                </div>
+                <div class="d-flex word-wrap">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">聯絡訂單發出用戶: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-call-user">私人聊天</span>
+                </div>
+            </div>
+        </div>
+        <div class="txt-order-detail order-detail-block">
+            <hr class="order-detail-line">
+            <div class="d-flex word-wrap flex-d-col">
+                <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品詳情/額外資訊: </span></div>
+                <span class="txt-style-large txt-order-detail" id="show-order-product-detail"></span>
+            </div>
+            <div class="d-flex word-wrap flex-d-col">
+                <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">購買產品的地址: </span></div>
+                <span class="txt-style-large txt-order-detail" id="show-order-product-purchase-address"></span>
+            </div>
+            <div class="d-flex word-wrap flex-d-col">
+                <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">訂單發出用戶接收產品地點: </span></div>
+                <span class="txt-style-large txt-order-detail" id="show-order-product-receive-address"></span>
+            </div>
+        </div>
+        <div class="order-detail-block cmt-area" id="">
+            <hr class="order-detail-line">
+            <div class="d-flex word-wrap flex-d-col">
+                <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail question-comment-area-title code">提問/評論區</span></div>
+                <span class="txt-style-large txt-order-detail" id="show-order-product-detail"></span>
+            </div>
+            <div class="d-flex word-wrap flex-d-col question-comment-area">
+                <span class="cmt-time">22分鐘</span>
+                <span class="repty-btn">回復</span>
+                <div>
+                    <span>來自</span>
+                    <span class="cmt-user-name">Peter</span>
+                    <span>的發言</span>
+                </div>
+                <div class="txt-style-cmt">
+                    <span>I very like this user.</span>
+                </div>
+            </div>
+            <div class="d-flex word-wrap flex-d-col question-comment-area user-self-comment">
+                <span class="cmt-time">剛剛</span>
+                <span class="repty-btn">回復</span>
+                <div>
+                    <span class="cmt-user-name" id="">你的發言</span>
+                </div>
+                <div class="txt-style-cmt">
+                    <span>回復Peter: 謝謝你</span>
+                </div>
+            </div>
+            <button id="ctm-add-btn">留言</button>
+            <div class="fill-space"></div>
+        </div>
+    </div>
+</div>

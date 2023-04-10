@@ -18,8 +18,10 @@ const auth = getAuth(app);
 
 
 window.addEventListener('load', function() {
-    setTimeout(autoSignOut, 100); 
-  });
+    setTimeout(autoSignOut, 150); 
+    setTimeout(setActive, 160);
+});
+
 
 $(document).on("click","#sign-out",function(){toSignOut();})
 
@@ -33,24 +35,41 @@ function toSignOut(){
 
 }
 function autoSignOut(){
-    if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)&&window.location.pathname=="/index.html"){
+    if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)){
         toSignOut();
-        setAccountStatus(false)
-    }
-    else if((localStorage.getItem("fyp-email")==null||localStorage.getItem("fyp-user-id")==null)&&window.location.pathname!="/index.html"){
-        toSignOut();
+        setAccountStatus(false);
+        herfToIndex(window.location.href);
     }else {
-        setAccountStatus(true)
+        setAccountStatus(true);
     }
 }
 function setAccountStatus(status){
+    
     if(status){
         $("#account-email").text(localStorage.getItem("fyp-email"));
         $(".account-status").css("display","inline-block");
         $("#sign-in").css("display","none");
     }else{
+        $("#account-email").text("");
         $(".account-status").css("display","none");
         $("#sign-in").css("display","inline-block");
     }
 
+}
+function herfToIndex(url){
+    var isLoginPage = ["create_order_form.html", "self_order.html", "self_information.html", "success_create_order.html"];
+    for(const page of isLoginPage){
+        if(url.indexOf(page)>0){
+            window.location.href = "index.html";
+        }
+    }
+}
+function setActive(){
+    var menuList = ["index","shop","travel","contact"];
+    for(var text of menuList){
+        if(window.location.href.indexOf(text)>0){
+            $("#"+text).addClass("active");
+            return;
+        }
+    }
 }
