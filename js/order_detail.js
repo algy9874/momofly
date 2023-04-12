@@ -28,37 +28,47 @@ function getOrderDetailRecord(primaryKey){
             });
             setOrderDetailRecord(recordList);
             closeLoadingAnimate();
+            reload = true;
         }).catch(err =>{
         });
     }else{
         window.location.href = "login.html"
     }
-
 }
-async function applyOrder(orderID, applicant, reason){
+async function applyOrder(orderID, applicant, reason, name){
     const db = getFirestore();
     const date = Timestamp.fromDate(new Date());
     const docRef = await addDoc(collection(db, "orderApplication"), {
         applicationOrderID: orderID,
         applicantID: applicant,
         reasonOfApplication: reason,
-        applicationTime: date
+        applicationTime: date,
+        applicantName: name,
+        applyResult: "Waiting",
+        cancelOrder: false
     });
     closeAccpetAnimate();
     showOrderAcceptSubmit(docRef.id , date);
 
 }
+var reload = false;
 $(document).on("click","#close-all-goback-btn", function(){
     showAccpetElement();
     closeOrderAcceptSubmit();
     closeMessageBox();
     closeOrderDetail();
     closeOrderDetailBackground();
+    location.reload();
 });
 $(document).on("click","#submit-accept-order-btn", function(){
     showAccpetAnimate();
     closeAccpetElement();
-    applyOrder($("#fyp-order-id").val(), localStorage.getItem("fyp-user-id"), $("#txtarea-accept-reason").val().replaceAll("\n","<br>"));
+    applyOrder(
+        $("#fyp-order-id").val(), 
+        localStorage.getItem("fyp-user-id"), 
+        $("#txtarea-accept-reason").val().replaceAll("\n","<br>"), 
+        $("#accept-user-name").val()
+    );
 })
 $(document).on("click",".order-item",function(){
     getOrderDetailRecord($(this).attr("id"));
@@ -68,6 +78,10 @@ $(document).on("click",".order-item",function(){
 });
 $(document).on("click",".message-box-background",function(){
     closeMessageBox();
+    if(reload){
+        reload = false;
+        location.reload();
+    }
 });
 //彈出式 申請接受訂單頁面(由詳細訂單內調用)
 $(document).on("click","#receive-btn",function(){
@@ -183,4 +197,5 @@ function setOrderDetailRecord(record){
     $("#show-order-product-detail").text(record[0]['productDetails']);
     $("#show-order-product-purchase-address").text(record[0]['purchaseAddress']);
     $("#show-order-product-receive-address").text(record[0]['shippingAddress']);
+    $("#show-order-product-link").text(record[0]['productLink']);
 }

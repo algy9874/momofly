@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-import { getFirestore, collection, getDocs, query, where, Timestamp} from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js';
+import { getFirestore, collection, getDocs, query, where, Timestamp, getDoc, doc, getCountFromServer} from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,6 +18,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 function getOrderRecord(uid){
+    clearAllElement();
     const db = getFirestore();
     const colRef = collection(db, "orderInformation");
     const q1 = query(collection(db,"orderApplication"), where("applicantID","==",uid));
@@ -27,23 +28,32 @@ function getOrderRecord(uid){
             hidden.push(doc.data()['applicationOrderID']); 
         });
     });
-    const q2 = query(colRef, where("creatorAccountID","!=",uid));
-    let recordList = [];
+    const q2 = query(colRef, where("creatorAccountID","!=",uid));    
+    var i = 0;
     getDocs(q2).then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-            console.log(hidden.indexOf(doc.id))
+        snapshot.docs.forEach(async (doc) => {
             if(hidden.indexOf(doc.id) < 0){
-                if(doc.data()['orderStatus']=="等待接取" && calRemainingTime(doc.data()['creationDate'])!="已完結"){
-                    if(recordList.length <= 12){
-                        recordList.push({ 
-                            ...doc.data(), id: doc.id
-                        }); 
+                if(doc.data()['orderStatus']=="等待接取" && calRemainingTime(doc.data()['creationDate'])!="已完結" && calRemainingTime(doc.data()['creationDate'])!="發生錯誤"){
+                    if(i <= 12){
+                        const coll = collection(db, "orderApplication");
+                        const q = query(coll, where("applicationOrderID", "==", doc.id), where("cancelOrder", "==", false));
+                        const snapshot = await getCountFromServer(q);
+                        console.log(doc.data());
+                        executeMakeOrderRecord(
+                            doc.id, 
+                            doc.data()['productName'],
+                            doc.data()['productImage'],
+                            doc.data()['creationDate'],
+                            doc.data()['remuneration'],
+                            doc.data()['currency'],
+                            doc.data()['purchaseAddress'],
+                            snapshot.data().count);
+                        i++;
                     }
                 }
             }
         });
-        executeMakeOrderRecord(recordList);
-    }).catch(err =>{});
+    }).catch(err =>{console.log(err)});
 }
 
 window.addEventListener('load', function() {
@@ -65,19 +75,20 @@ function getCurrentTime(){
     var seconds = ('0' + now.getSeconds()).slice(-2);
     return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 }
-function executeMakeOrderRecord(makeOrderRecord){
+function clearAllElement(){
     $(".product__filter").empty();
-    for(let record of makeOrderRecord){
-        $(".product__filter").append(
-            generateOrder(
-                record['id'],
-                setMaxLength(record['productName'], 12),
-                record['productImage'],
-                calRemainingTime(record['creationDate']), 
-                record['remuneration']+" "+record['currency'], 
-                setMaxLength(record['purchaseAddress'], 8), 0
-            ));
-    }
+}
+function executeMakeOrderRecord(id, productName, productImage, createDate, remuneration, currency, purchaseAddress, applyOfNum){
+    $(".product__filter").append(
+        generateOrder(
+            id,
+            setMaxLength(productName, 12),
+            productImage,
+            calRemainingTime(createDate), 
+            remuneration+" "+currency, 
+            setMaxLength(purchaseAddress, 8), 
+            applyOfNum
+        ));
 }
 function calRemainingTime(time){
     var nowTime = Timestamp.fromDate(new Date());
@@ -117,7 +128,7 @@ function generateOrder(productID, productName, productImg, productTimeLeft, remu
                     +'<h5>'+purchaseAddress+'</h5>'
                 +'</div>'
                 +'<div class="d-flex">'
-                    +'<h5>[hard code]提出接單申請人數: &nbsp;</h5>'
+                    +'<h5>提出接單申請人數: &nbsp;</h5>'
                     +'<h5>'+numOfApply+'</h5>'
                 +'</div>'
                 +'<button class="accept-order-btn" id="'+productID+'-btn">提出接取訂單</button>'

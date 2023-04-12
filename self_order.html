@@ -25,10 +25,211 @@
     <link rel="stylesheet" href="css/txtStyle.css" type="text/css">
     <link rel="stylesheet" href="css/search_focus.css" type="text/css">
     <link rel="stylesheet" href="css/user.css" type="text/css">
+    <link rel="stylesheet" href="css/create_order_form.css" type="text/css">
 
 </head>
 
 <body>
+    <div class="update-background none"></div>
+    <div class="update-order-block none">
+        <div class="animate-submit-loading update-animate none"></div>
+        <div class="update-order-success none">
+            <img src="img/success_tick.png" width="200px" height="200px"/>
+            <h4 class="txt-style-title create-order-title">更新成功</h4>
+            <span class="update-go-back-btn">返回</span>
+        </div>
+        <div class="fm-update-record update-form-element none">
+            <div class="close-update-block-btn">+</div>
+            <div class="update-content">
+                <div class="form-inner-cont update-form-block">
+                    <h4 class="txt-style-title create-order-title">更新訂單資料</h4>
+                    <div class="form-input">
+                        <label for="w3lSender">產品數量</label>
+                        <input type="number" class="oc-number-box" name="oc-quantity" id="oc-product-quantity" placeholder="產品數量(必須填寫)" maxlength="4" required="" />
+                        <span class="order-form-error-message none" id="oc-product-quantity-err">產品數量必須填寫 !!!</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">產品價錢(單件)</label>
+                        <input type="number" step="0.001" class="oc-number-box" name="oc-price" id="oc-product-price" placeholder="產品價錢(必須填寫) " required="" />
+                        <span class="order-form-error-message none" id="oc-product-price-err">產品價錢必須填寫 !!!</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">購買產品的貨幣</label>
+                        <div class="product-select-box">
+                            <input class="oc-product-select" id="oc-product-price-currency" required="" type="text" placeholder="請選擇貨幣" readonly="true"/>
+                            <div class="product-select-box-option none" id="oc-product-price-currency-select">
+                                <span class="product-select-box-item select-product-price-currency">USD</span>
+                                <span class="product-select-box-item select-product-price-currency">HKD</span>
+                                <span class="product-select-box-item select-product-price-currency">EUR</span>
+                            </div>
+                        </div>
+                        <span class="order-form-error-message none" id="oc-product-price-currency-err">貨幣必須選擇 !!!</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">購買地址</label>
+                        <input type="text" name="oc-purchase-address" id="oc-purchase-product-address" placeholder="購買地址(必須填寫)" required="" />
+                        <span class="order-form-error-message none" id="oc-purchase-product-address-err">購買地址必須填寫 !!!</span>
+
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">接收地址</label>
+                        <input type="text" name="oc-receive-address" id="oc-receive-product-address" placeholder="接收產品地址(必須填寫)" required="" />
+                        <span class="order-form-error-message none" id="oc-receive-product-address-err">接收地址必須填寫 !!!</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lMessage">產品詳情</label>
+                        <textarea name="oc-details" id="oc-product-details" placeholder="產品備註/描述"></textarea>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSender">訂單顯示用戶名稱</label>
+                        <input type="text" name="oc-display-name" id="oc-product-user-name" placeholder="顯示用戶名稱(可選擇填寫)" />
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSubject">更新可獲報酬</label>
+                        <input type="number" step="0.001" class="oc-number-box" name="oc-remuneration" id="oc-product-remuneration" placeholder="報酬(必須填寫)" maxlength="4" required="" />
+                        <span class="order-form-error-message none" id="oc-product-remuneration-err">必須設定報酬 !!!</span>
+                    </div>
+                    <div class="form-input">
+                        <label for="w3lSender">報酬貨幣</label>
+                        <div class="product-select-box">
+                            <input name="oc-currency" class="oc-product-select" id="oc-product-currency" type="text" placeholder="請選擇貨幣" readonly="true"/>
+                            <div class="product-select-box-option none" id="oc-product-currency-select">
+                                <span class="product-select-box-item select-product-currency">USD</span>
+                                <span class="product-select-box-item select-product-currency">HKD</span>
+                                <span class="product-select-box-item select-product-currency">EUR</span>
+                            </div>
+                        </div>   
+                        <span class="order-form-error-message none" id="oc-product-currency-err">報酬貨幣必須選擇 !!!</span>                 
+                    </div>
+                    <div class="fill-space"></div><div class="fill-space"></div>
+                    <button type="button" class="btn" id="update-order-record-btn">確定更新</button>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="apply-background none"></div>
+    <div class="message-apply-background none"></div>
+    <div class="apply-block none">
+        <span class="txt-apply-name apply-block-element"></span>
+        <div class="apply-reason-block apply-block-element">
+            <span class="txt-apply-reason">申請原因</span>
+            <textarea class="txtarea-apply-reason" readonly></textarea>
+        </div>
+
+        <div class="apply-reason-block apply-success-block none">
+            <img src="img/success_tick.png" width="200px" height="200px"/>
+            <h4 class="apply-success-msg">已成功選擇接單用戶</h4>
+            <span class="apply-block-to-back-btn">返回</span>
+        </div>
+
+        <button class="accept-user-apply-btn apply-block-element">接受此用戶的申請</button>
+        <button class="contact-apply-user-btn none">聯絡對方</button>
+        <div class="animate-submit-loading apply-update none"></div>
+
+    </div>
+    <div class="apply-select-block none">
+        <div class="close-apply-select-btn">+</div>
+        <div class="apply-select-content"></div>
+    </div>
+
+    <div class="message-box-background none"></div>
+    <div class="fm-message-box delete-accept-order code none">
+        <button class="txt-style-large load-submit-accept-order form-btn delete-accept-order-btn cancel-item-first">取消申請</button>
+        <span class="txt-style-title-message set-top cancel-item-first">取消申請接取訂單</span>
+        <div class="none cancel-success">
+            <img src="img/cancel.png"></img>
+            <span class="txt-style-title-message">取消申請完成</span>   
+        </div>
+
+        <div class="animate-submit-loading animate-delete-accept-order none"></div>
+    </div>
+    <div class="fm-message-box code none" id="update-accept-order-box">
+        <button class="txt-style-large load-submit-accept-order update-reason-btn form-element" id="submit-accept-order-btn">更新</button>
+        <span class="txt-style-large none submit-accept-order-success" id="close-all-goback-btn">返回</span>   
+        <span class="txt-style-title-message">更新申請接取訂單</span>   
+        <div class="flex-d-col txt-area-block load-submit-accept-order form-element">
+            <span class="txt-style-large">顯示用戶名稱</span>   
+            <input type="text" class="message-box-input" id="update-user-name" placeholder="可選擇填寫"/>
+            <span class="txt-style-large">申請原因</span>   
+            <textarea class="message-box-txtarea" id="update-txtarea-accept-reason"></textarea>
+        </div>
+        <div class="none flex-d-col load-submit-accept-order submit-accept-order-success" id="submit-success">
+            <img src="img/success_tick.png"></img>
+            <span class="txt-style-title-message">更新成功</span>   
+        </div>
+        <div class="animate-submit-loading animate-submit none" id="animate-accept-order"></div>
+    </div>
+    <div class="order-detail-background none"></div>
+    <div class="fm-order-detail none">
+        <div id="order-detail-close-btn"><span class="fix-location">+</span></div>
+        <div class="animate-submit-loading" id="loader-record"></div>
+        <button class="txt-style-large none cancel-accept-btn user-application-btn" id="report-btn">取消申請</button>
+        <button class="txt-style-large none update-accept-btn user-application-btn" id="receive-btn">更新申請</button>
+        <button class="txt-style-large none user-application-btn fm-update-order-btn" id="select-accept-btn">選擇接單者</button>
+        <button class="txt-style-large none user-application-btn fm-update-order-btn" id="update-order-btn">更新訂單資料</button>
+        <input type="hidden" id="fyp-order-id"/>
+        <input type="hidden" id="create-order-user-id"/>
+        <div class="fm-order-detail-content loading-element none">
+            <div class="word-wrap">
+                <img class="order-image-size" id="show-order-product-image" src=""/>
+                <div class="txt-order-detail order-detail-block">
+                    <span class="txt-style-title-message" id="show-order-product-name"></span>
+                    <hr class="order-detail-line">
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品類別: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-type"></span>
+                    </div>
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品數量: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-quantity"></span>
+                    </div>
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品價錢: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-price"></span>
+                    </div>
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">報酬金額: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-remuneration"></span>
+                    </div>
+                    <hr class="order-detail-line">
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">訂單發出用戶: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-user-name"></span>
+                    </div>
+                    <div class="d-flex word-wrap">
+                        <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">聯絡訂單發出用戶: </span></div>
+                        <span class="txt-style-large txt-order-detail" id="show-order-product-call-user">私人聊天</span>
+                    </div>
+                </div>
+            </div>
+            <div class="txt-order-detail order-detail-block">
+                <hr class="order-detail-line">
+                <div class="d-flex word-wrap flex-d-col">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品詳情/額外資訊: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-detail"></span>
+                </div>
+                <div class="d-flex word-wrap flex-d-col">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">購買產品的地址: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-purchase-address"></span>
+                </div>
+                <div class="d-flex word-wrap flex-d-col">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">訂單發出用戶接收產品地點: </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-receive-address"></span>
+                </div>
+                <hr class="order-detail-line">
+                <div class="d-flex word-wrap flex-d-col">
+                    <div class="order-detail-txt-block-size"><span class="txt-style-large txt-order-detail">產品相關網站超連結 </span></div>
+                    <span class="txt-style-large txt-order-detail" id="show-order-product-link"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -88,7 +289,7 @@
             <div class="d-flex justify-content-center align-items-center flex-d-col set-to-top" id="">
                 <span class="txt-style-title-message order-result-small-title" id="accept-order-title">發出申請的訂單</span>
             </div>
-            <div class="user-order-content" id="self-accpet-order">
+            <div class="user-order-content" id="self-accept-order">
 
             </div>
         </div>
@@ -132,6 +333,7 @@
     <script src="js/search.js"></script>
     <script src="js/logout.js" type="module"></script>
     <script src="js/generate_order_data.js" type="module"></script>
+    <script src="js/apply_order.js" type="module"></script>
 
 </body>
 

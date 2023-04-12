@@ -61,7 +61,7 @@ async function createOrder(uid){
     const storageRef = ref(storage, uid+'/'+docRef.id+'/'+getInputImg().name);
     const uploadTask = uploadBytesResumable(storageRef, getInputImg());
     uploadTask.on('state_changed', (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       $("#upload-progress").text(progress);
     }, (error) => {
         console.log(error.message);
@@ -95,6 +95,8 @@ function setDateTimeFormat(nowTime){
     let seconds = ('0' + date.getSeconds()).slice(-2);
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+
+
 
 
 $(document).on("click","#create-order-submit-btn", function(){
